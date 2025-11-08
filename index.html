@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GREEN MANAGEMENT S.R.L. — Mayorista de bienes durables y servicios para edificios</title>
+  <meta name="description" content="GREEN MANAGEMENT S.R.L. — Mayorista de bienes durables sostenibles, servicios de apoyo y mantenimiento para edificios. Ingeniería de compras, logística y gestión operativa en Argentina." />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="color-scheme" content="light dark" />
+  <!--
+    Empresa: GREEN MANAGEMENT S.R.L.
+    Email: info@greenmanagementar.pro
+    Dirección: IGUALDAD 1108, C1424, Ciudad de Buenos Aires
+    Rubro: Miscellaneous Durable Goods Merchant Wholesalers · Other Support Services · Services to Buildings and Dwellings
+    Requisitos:
+      - Sin teléfono en el formulario (cumple App Store Review Guidelines)
+      - Formulario en modal + modal de confirmación
+      - Accesible (labels, aria-live, foco)
+      - Scroll suave, una sola página, sin frameworks externos
+  -->
+  <style>
+    /* ===================== Tokens de diseño ===================== */
+    :root{
+      --bg:#0C1310;         /* verde muy oscuro */
+      --bg-2:#0E1713;
+      --panel:#0f1d17;
+      --panel-2:#11241a;
+      --text:#e9f5ee;
+      --text-2:#cfe4d8;
+      --muted:#a4bdb0;
+      --brand:#2bb673;      /* verde principal */
+      --brand-2:#31c97f;
+      --accent:#7cd2a7;
+      --stroke:rgba(255,255,255,.10);
+      --danger:#ef4444;
+      --radius:18px;
+      --radius-lg:28px;
+      --shadow:0 12px 36px rgba(0,0,0,.35);
+      --maxw:1220px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.65; color:var(--text);
+      background:linear-gradient(180deg,var(--bg) 0%, var(--bg-2) 60%, #0b1210 100%);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:#bff2d5;text-decoration:none}
+    a:hover{color:white}
+    img{max-width:100%;display:block;border-radius:14px}
+    h1,h2,h3{line-height:1.22;margin:0 0 .5rem}
+    h1{font-size:clamp(28px,4.2vw,50px)}
+    h2{font-size:clamp(22px,2.8vw,34px)}
+    h3{font-size:clamp(18px,2.2vw,22px)}
+    p{margin:.35rem 0 1rem;color:var(--text-2)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    .section{padding:72px 0}
+    .section-header{margin-bottom:26px}
+    .grid{display:grid;gap:22px}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:980px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%, var(--panel-2) 100%);
+      border:1px solid var(--stroke); border-radius:var(--radius);
+      padding:26px; box-shadow:var(--shadow)
+    }
+    .chip{
+      display:inline-flex;gap:.5rem;align-items:center;
+      background:rgba(43,182,115,.14); color:#d9f8ea;
+      border:1px dashed rgba(43,182,115,.45);
+      padding:.35rem .7rem; border-radius:999px
+    }
+    .btn{
+      appearance:none;border:0;border-radius:12px;
+      padding:14px 18px;font-weight:800;cursor:pointer;
+      background:linear-gradient(180deg,var(--brand) 0%, var(--brand-2) 100%);
+      color:#062015; box-shadow:0 10px 28px rgba(48,200,127,.35);
+      transition:.25s transform ease,.25s box-shadow ease
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.secondary{
+      background:#12231a; color:#d4efe2; border:1px solid var(--stroke); box-shadow:none
+    }
+    .muted{color:var(--muted)}
+    .kbd{background:#0e1e17;border:1px solid var(--stroke);padding:2px 6px;border-radius:8px}
+    .tag{font-size:.8rem;color:#bcead7}
+
+    /* ===================== Header + nav ===================== */
+    header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:saturate(150%) blur(8px);
+      background:rgba(10,18,14,.75); border-bottom:1px solid var(--stroke)
+    }
+    .nav{
+      height:68px; display:flex; align-items:center; justify-content:space-between; gap:18px
+    }
+    .nav-menu{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.02em}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:radial-gradient(120px 120px at 30% 30%, #8be7b8 0%, #0d5e3a 60%, #0a1511 100%);
+      border:1px solid rgba(255,255,255,.15)
+    }
+
+    /* ===================== Hero ===================== */
+    .hero{position:relative;overflow:hidden}
+    .hero-media{
+      position:absolute;inset:0;z-index:-1;
+      background:
+        radial-gradient(60% 55% at 70% 20%, rgba(43,182,115,.35) 0%, rgba(43,182,115,0) 60%),
+        linear-gradient(180deg, rgba(10,18,14,.20) 0%, rgba(10,18,14,.85) 70%),
+        url('https://images.unsplash.com/photo-1581091014542-7c02ad1b2e94?q=80&w=2000&auto=format&fit=crop'); /* tech/green facility */
+      background-size:cover;background-position:center;
+      filter:saturate(104%) contrast(103%)
+    }
+    .hero .container{padding:108px 20px 76px}
+    .hero h1{max-width:920px}
+    .hero-lead{max-width:880px;font-size:1.12rem}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+    .stat{background:rgba(255,255,255,.04);border:1px solid var(--stroke);padding:16px;border-radius:16px}
+    .stat b{font-size:1.35rem}
+    @media(max-width:980px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+    /* ===================== Listas con puntos ===================== */
+    .li{display:flex;gap:12px;align-items:flex-start}
+    .li .dot{width:12px;height:12px;border-radius:99px;margin-top:8px;flex-shrink:0;
+      background:conic-gradient(from 180deg at 50% 50%, var(--brand), #0f9f5f, #31c97f)}
+
+    /* ===================== Servicios ===================== */
+    .service .thumb{height:120px;border:1px solid var(--stroke);border-radius:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;background:#0c1813}
+    .service:hover{outline:1px solid rgba(124,210,167,.35)}
+
+    /* ===================== Timeline ===================== */
+    .timeline{position:relative;border-left:2px dashed rgba(124,210,167,.45);margin-left:12px;padding-left:18px}
+    .timeline .step{margin-bottom:12px}
+    .badge{
+      display:inline-flex;gap:8px;align-items:center;
+      background:rgba(49,201,127,.2);border:1px solid rgba(49,201,127,.5);
+      color:#d7ffeb;border-radius:999px;padding:4px 10px;font-weight:800
+    }
+
+    /* ===================== Footer ===================== */
+    footer{border-top:1px solid var(--stroke);padding:38px 0;color:#cfe4d8}
+
+    /* ===================== Modales ===================== */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.6);z-index:60;padding:20px}
+    .modal.open{display:grid}
+    .dialog{
+      width:min(740px,92vw);
+      background:linear-gradient(180deg,#0e1d17 0%, #0b1813 100%);
+      border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);padding:22px
+    }
+    .dialog>header{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--stroke)}
+    .x{background:#12231a;border:1px solid var(--stroke);color:#d3eee1;padding:6px 10px;border-radius:10px;cursor:pointer}
+
+    /* ===================== Formulario ===================== */
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    form .row-1{display:grid;grid-template-columns:1fr;gap:14px}
+    label{font-weight:800;color:#e7f5ee}
+    input,select,textarea{
+      width:100%;background:#0a1612;border:1px solid var(--stroke);
+      color:#eaf7f0;border-radius:12px;padding:12px 14px
+    }
+    textarea{min-height:140px;resize:vertical}
+    .form-help{font-size:.9rem;color:#a7c1b5}
+
+    /* = Checkbox accesible y clickeable en toda la línea = */
+    .checkline{
+      display:flex;align-items:flex-start;gap:12px;cursor:pointer;
+      user-select:none;padding:10px;border:1px solid var(--stroke);border-radius:12px;background:#0b1813
+    }
+    .checkline input[type="checkbox"]{
+      appearance:none;width:20px;height:20px;border-radius:6px;
+      border:1.5px solid rgba(255,255,255,.4);background:#07110d;display:grid;place-items:center;
+      margin-top:2px;flex-shrink:0;outline:0
+    }
+    .checkline input[type="checkbox"]::after{
+      content:""; width:12px;height:12px;border-radius:3px;transform:scale(0);
+      transition:120ms transform ease-in-out;background:linear-gradient(180deg,var(--brand-2),#14a15f)
+    }
+    .checkline input[type="checkbox"]:checked{border-color:#9bf2c8;background:#062616}
+    .checkline input[type="checkbox"]:checked::after{transform:scale(1)}
+    .error-box{
+      display:none;gap:10px;align-items:flex-start;margin:.5rem 0 0;
+      background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.45);color:#fecaca;padding:12px;border-radius:12px
+    }
+    .error-box.show{display:flex}
+    .toast{
+      display:flex;gap:10px;align-items:flex-start;
+      background:rgba(49,201,127,.18);border:1px solid rgba(49,201,127,.45);
+      color:#d6ffe9;padding:16px;border-radius:16px
+    }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <!-- ===================== Header con navegación ===================== -->
+  <header role="banner" aria-label="Barra de navegación principal">
+    <div class="container nav">
+      <div class="brand">
+        <span class="logo" aria-hidden="true"></span>
+        <span>GREEN MANAGEMENT</span>
+      </div>
+      <nav class="nav-menu" aria-label="Secciones del sitio">
+        <a href="#inicio">Inicio</a>
+        <a href="#nosotros">Quiénes Somos</a>
+        <a href="#servicios">Soluciones</a>
+        <a href="#ventajas">¿Por qué elegirnos?</a>
+        <a href="#proceso">Nuestro Proceso</a>
+        <a href="#frases">Cómo contactarnos</a>
+        <a href="#contacto" id="contactoLink" role="button" aria-haspopup="dialog" aria-controls="modalContacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== 1. Hero ===================== -->
+  <section id="inicio" class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="container">
+      <span class="chip">Mayorista · Servicios de apoyo · Mantenimiento a edificios</span>
+      <h1 id="hero-title">Proveedor integral de soluciones sustentables para operaciones y edificios</h1>
+      <p class="hero-lead">
+        Desde Buenos Aires abastecemos a empresas y administraciones con <b>bienes durables</b> (iluminación LED de grado industrial,
+        dispensadores y equipos de higiene, contenedores de reciclaje, señalética, mobiliario urbano) y
+        <b>servicios de soporte</b> que optimizan la gestión del edificio: abastecimiento, logística, mantenimiento ligero y limpieza técnica.
+      </p>
+      <div class="hero-cta">
+        <a class="btn" href="#servicios">Ver soluciones</a>
+        <button class="btn secondary" id="openTop" aria-haspopup="dialog" aria-controls="modalContacto">Escribirnos</button>
+      </div>
+      <div class="stats" role="list" aria-label="Indicadores de operación">
+        <div class="stat" role="listitem"><b>+900</b><br><span class="muted">ítems en catálogo con reposición estable</span></div>
+        <div class="stat" role="listitem"><b>48 h</b><br><span class="muted">lead time promedio CABA y AMBA</span></div>
+        <div class="stat" role="listitem"><b>60%</b><br><span class="muted">ahorro energético con luminarias LED</span></div>
+        <div class="stat" role="listitem"><b>100%</b><br><span class="muted">trazabilidad de pedidos y facturación</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. Sobre nosotros ===================== -->
+  <section id="nosotros" class="section" aria-labelledby="nosotros-title">
+    <div class="container grid grid-2">
+      <div>
+        <div class="section-header">
+          <span class="chip">Nuestra identidad</span>
+          <h2 id="nosotros-title">Quiénes somos en Green Management S.R.L.</h2>
+          <p>Somos una compañía argentina que integra **comercio mayorista** con **servicios de apoyo** orientados a la operación diaria
+            de edificios corporativos, centros logísticos y residencias premium. Unimos ingeniería de compras, abastecimiento sostenible,
+            logística y mantenimiento liviano para que equipos de Facility Management reduzcan costos, desperdicios y tiempos muertos.</p>
+        </div>
+        <div class="grid">
+          <div class="li"><span class="dot" aria-hidden="true"></span><p>Abordaje consultivo: relevamos consumos, definimos <i>stock mínimo</i> y parametrizamos reposiciones automatizadas por punto de pedido.</p></div>
+          <div class="li"><span class="dot" aria-hidden="true"></span><p>Homologación de proveedores y cumplimiento normativo (seguridad eléctrica, bromatología, fichas técnicas y MSDS) con <span class="kbd">trazabilidad auditada</span>.</p></div>
+          <div class="li"><span class="dot" aria-hidden="true"></span><p>Plan de circularidad: programas de reciclaje interno y reacondicionamiento de equipamiento para extender su vida útil.</p></div>
+        </div>
+      </div>
+      <aside class="card" aria-label="Datos clave">
+        <h3>Nuestro alcance</h3>
+        <ul>
+          <li>Segmentos: oficinas AAA, parques industriales, logística urbana, salud privada, hotelería.</li>
+          <li>Catálogo: luminarias LED industriales, contenedores y estaciones de reciclaje, dispensers touch-free, alfombras técnicas, señalética y EPP.</li>
+          <li>Servicios: limpieza técnica, <i>handyman</i>, shock sanitario, inventarios, micro-logística en sitio.</li>
+        </ul>
+        <p class="form-help">Gestionamos datos conforme a principios de necesidad, finalidad y transparencia.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== 3. Servicios ===================== -->
+  <section id="servicios" class="section" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip">Lo que resolvemos</span>
+        <h2 id="servicios-title">Soluciones para edificios y operaciones exigentes</h2>
+        <p>Diseñamos un mix entre productos durables y servicios de apoyo para que tu edificio opere sin interrupciones.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card service" aria-labelledby="sv1">
+          <div class="thumb"><span>LED industrial &amp; señalética</span></div>
+          <h3 id="sv1">Abastecimiento Mayorista Sustentable</h3>
+          <p>Curamos proveedores y especificaciones técnicas para iluminación, higiene y segregación de residuos. Aseguramos stock
+            y repuestos, con garantías y fichas técnicas disponibles.</p>
+          <ul>
+            <li>Luminarias LED (IP65/IK08) y drivers reemplazables.</li>
+            <li>Estaciones de reciclaje modulares y contenedores ignífugos.</li>
+            <li>Señalética fotoluminiscente, braille y de seguridad.</li>
+          </ul>
+        </article>
+
+        <article class="card service" aria-labelledby="sv2">
+          <div class="thumb"><span>Mano de obra especializada</span></div>
+          <h3 id="sv2">Servicios de Apoyo a la Operación</h3>
+          <p>Cuadrillas de <i>handyman</i>, limpieza técnica y puesta a punto para auditorías. Protocolos seguros y cobertura en horarios
+            extendidos sin interferir con la actividad principal.</p>
+          <ul>
+            <li>Armados, reinstalaciones, recambios y fijaciones.</li>
+            <li>Shock de higiene y desinfección certificable.</li>
+            <li>Reportes fotográficos y bitácora digital diaria.</li>
+          </ul>
+        </article>
+
+        <article class="card service" aria-labelledby="sv3">
+          <div class="thumb"><span>Operación sin quiebres</span></div>
+          <h3 id="sv3">Logística y Gestión de Reposición</h3>
+          <p>Planificamos entregas just-in-time y abastecimiento por consumo real. Tableros de control, lotes y vencimientos para
+            evitar pérdidas y roturas de stock.</p>
+          <ul>
+            <li>Reposición 48 h CABA/AMBA (SLA medido).</li>
+            <li>Depósito intermedio y kits por piso/sector.</li>
+            <li>Serialización y trazabilidad por QR.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4. Ventajas (Por qué elegirnos) ===================== -->
+  <section id="ventajas" class="section" aria-labelledby="ventajas-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip">Valor más allá del precio</span>
+        <h2 id="ventajas-title">¿Por qué elegir a Green Management?</h2>
+        <p>Integramos producto, logística y servicio en un solo responsable para eliminar la fricción operativa.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Catálogo profesional y homologado</h3>
+          <p>Especificaciones técnicas claras, fichas y certificaciones. Evitás falsas equivalencias y compras improvisadas.</p>
+        </div>
+        <div class="card">
+          <h3>Menos residuos, más vida útil</h3>
+          <p>Priorizamos equipos reparables y programas de circularidad. Menos descarte y menor huella de carbono.</p>
+        </div>
+        <div class="card">
+          <h3>Un solo SLA para todo</h3>
+          <p>Una cara, un tablero, un compromiso: abastecimiento, servicio y logística bajo métricas de cumplimiento únicas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. Proceso ===================== -->
+  <section id="proceso" class="section" aria-labelledby="proceso-title">
+    <div class="container grid grid-2">
+      <div>
+        <div class="section-header">
+          <span class="chip">De la necesidad al funcionamiento</span>
+          <h2 id="proceso-title">Nuestro proceso de trabajo</h2>
+          <p>Ruta clara, con responsables y tiempos definidos. Siempre sabés en qué etapa estamos.</p>
+        </div>
+        <div class="timeline" aria-label="Línea de tiempo del proceso">
+          <div class="step">
+            <span class="badge">1 · Diagnóstico</span>
+            <p>Relevamiento técnico, inventario inicial y <strong>matriz de consumos</strong>. Definimos SKU críticos y stock mínimo por área.</p>
+          </div>
+          <div class="step">
+            <span class="badge">2 · Implementación</span>
+            <p>Instalaciones y ajustes; alta de tablero de control; capacitación breve al personal de piso; acuerdos de SLA y niveles de servicio.</p>
+          </div>
+          <div class="step">
+            <span class="badge">3 · Operación continua</span>
+            <p>Reposición por punto de pedido, mantenimiento ligero programado y reportes mensuales con <strong>KPIs de ahorro</strong>.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="card">
+        <h3>Compromiso con privacidad</h3>
+        <p>Solicitamos sólo los datos necesarios para responder tu consulta y coordinar una visita técnica. No pedimos teléfono ni
+          contraseñas. Podés solicitar la eliminación de datos cuando quieras.</p>
+        <button class="btn" id="openSide" aria-haspopup="dialog" aria-controls="modalContacto">Iniciar evaluación</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== 6. Frases para la forma de contacto ===================== -->
+  <section id="frases" class="section" aria-labelledby="frases-title">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip">Para escribirnos mejor</span>
+        <h2 id="frases-title">Frases útiles al completar el formulario</h2>
+        <p>Estas pistas aceleran la propuesta inicial. Copiá y pegá lo que aplique.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Especificación y uso</h3>
+          <p>“Necesitamos <strong>luminarias LED IP65</strong> para depósito de 1.200 m²; altura de montaje 8 m; fotometría asimétrica.”</p>
+        </div>
+        <div class="card">
+          <h3>Logística y reposición</h3>
+          <p>“Consumo mensual de <strong>bolsas y químicos</strong>; queremos reposición automática por punto de pedido en 3 sectores.”</p>
+        </div>
+        <div class="card">
+          <h3>Servicios en sitio</h3>
+          <p>“Requerimos <strong>handyman 2 veces por semana</strong> para ajustes menores y reinstalaciones; horario posterior a las 18 hs.”</p>
+        </div>
+      </div>
+      <div class="hero-cta" style="margin-top:10px">
+        <button class="btn" id="openFrases" aria-haspopup="dialog" aria-controls="modalContacto">Abrir formulario</button>
+        <a class="btn secondary" href="#servicios">Volver a soluciones</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. Contacto (datos) ===================== -->
+  <section id="contacto" class="section" aria-labelledby="contacto-title">
+    <div class="container grid grid-2">
+      <div>
+        <div class="section-header">
+          <span class="chip">Canales oficiales</span>
+          <h2 id="contacto-title">Contacto institucional</h2>
+        </div>
+        <div class="card">
+          <p><strong>Dirección:</strong><br>IGUALDAD 1108, C1424, Ciudad de Buenos Aires</p>
+          <p><strong>E-mail:</strong><br><a href="mailto:info@greenmanagementar.pro">info@greenmanagementar.pro</a></p>
+          <p class="muted">Preferimos contacto por correo electrónico. Sin teléfonos, sin datos sensibles.</p>
+          <button class="btn" id="openBottom" aria-haspopup="dialog" aria-controls="modalContacto">Formulario seguro</button>
+        </div>
+      </div>
+      <aside class="card">
+        <h3>Preguntas frecuentes</h3>
+        <p><span class="tag">Cobertura</span> CABA y AMBA con envíos 48 h; resto del país con red logística aliada.</p>
+        <p><span class="tag">Garantías</span> Productos durables con respaldo de repuestos y documentación técnica.</p>
+        <p><span class="tag">Sustentabilidad</span> Programas de reciclaje interno y retiro de descartes especiales.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== Footer ===================== -->
+  <footer role="contentinfo">
+    <div class="container" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap">
+      <p>© <span id="yyyy"></span> GREEN MANAGEMENT S.R.L. — Todos los derechos reservados.</p>
+      <p class="muted">Ciudad de Buenos Aires · Argentina</p>
+    </div>
+  </footer>
+
+  <!-- ===================== Modal: Formulario de contacto ===================== -->
+  <div class="modal" id="modalContacto" role="dialog" aria-modal="true" aria-labelledby="contactoHeading" aria-describedby="contactoDesc">
+    <div class="dialog">
+      <header>
+        <h3 id="contactoHeading">Escribinos y coordinemos</h3>
+        <button class="x" id="cerrarContacto" aria-label="Cerrar">Cerrar</button>
+      </header>
+      <div class="content">
+        <p id="contactoDesc" class="form-help">
+          Usaremos tus datos solo para responder la consulta y coordinar una visita técnica. Podés pedir la eliminación de datos cuando quieras.
+        </p>
+
+        <!-- Errores accesibles -->
+        <div id="errors" class="error-box" role="alert" aria-live="polite">
+          <div><strong>Revisá los campos:</strong> <span id="errText"></span></div>
+        </div>
+
+        <form id="formContacto" novalidate>
+          <div class="row">
+            <div>
+              <label for="nombre">Nombre y apellido</label>
+              <input id="nombre" name="nombre" autocomplete="name" placeholder="Tu nombre" required />
+              <div class="form-help">Ej.: Valeria Montenegro</div>
+            </div>
+            <div>
+              <label for="email">Correo electrónico</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tu@empresa.com.ar" required />
+              <div class="form-help">Respondemos dentro de 1 día hábil.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="empresa">Empresa</label>
+              <input id="empresa" name="empresa" autocomplete="organization" placeholder="Razón social (opcional)" />
+            </div>
+            <div>
+              <label for="asunto">Asunto</label>
+              <select id="asunto" name="asunto" aria-label="Elegí el asunto">
+                <option>Abastecimiento mayorista</option>
+                <option>Servicios en sitio</option>
+                <option>Logística y reposición</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row-1">
+            <div>
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Contanos necesidad, cantidades, tiempos y restricciones del sitio."></textarea>
+              <div class="form-help">Cuanto más preciso, mejor el dimensionamiento inicial.</div>
+            </div>
+          </div>
+
+          <!-- Consentimiento (clickeable en toda la línea) -->
+          <label class="checkline" id="consentLine">
+            <input type="checkbox" id="consent" aria-describedby="consentHelp" />
+            <span>
+              Autorizo el uso de mis datos para responder esta solicitud y coordinar servicios.
+              <span id="consentHelp" class="form-help" style="display:block">Sin compartir con terceros no involucrados.</span>
+            </span>
+          </label>
+
+          <div class="row-1" style="margin-top:6px">
+            <button class="btn" type="submit">Enviar</button>
+            <button class="btn secondary" type="button" id="cancelar">Cancelar</button>
+          </div>
+
+          <p class="form-help">No solicitamos teléfono. Nunca pedimos contraseñas ni códigos por e-mail.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Modal: Confirmación de envío ===================== -->
+  <div class="modal" id="modalOk" role="dialog" aria-modal="true" aria-labelledby="okTitle">
+    <div class="dialog">
+      <header>
+        <h3 id="okTitle">¡Mensaje enviado con éxito!</h3>
+        <button class="x" id="cerrarOk" aria-label="Cerrar">Cerrar</button>
+      </header>
+      <div class="content">
+        <div class="toast" role="status" aria-live="polite">
+          <div>
+            <p><strong>Gracias.</strong> Recibimos tu consulta y responderemos al correo indicado.</p>
+            <p class="muted">Si necesitás ampliar la información, escribinos a <a href="mailto:info@greenmanagementar.pro">info@greenmanagementar.pro</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Scripts ===================== -->
+  <script>
+    // Año dinámico en el footer
+    document.getElementById('yyyy').textContent = new Date().getFullYear();
+
+    // Scroll suave para enlaces internos
+    (function(){
+      const links = document.querySelectorAll('a[href^="#"]:not([aria-haspopup])');
+      links.forEach(a=>{
+        a.addEventListener('click', e=>{
+          const id = a.getAttribute('href').slice(1);
+          const el = document.getElementById(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); history.replaceState(null,'','#'+id); }
+        });
+      });
+    })();
+
+    // ===== Modales =====
+    const modalContacto = document.getElementById('modalContacto');
+    const modalOk = document.getElementById('modalOk');
+    const openers = [
+      document.getElementById('openTop'),
+      document.getElementById('openSide'),
+      document.getElementById('openFrases'),
+      document.getElementById('openBottom'),
+      document.getElementById('contactoLink')
+    ].filter(Boolean);
+    const cerrarContacto = document.getElementById('cerrarContacto');
+    const cerrarOk = document.getElementById('cerrarOk');
+    const cancelar = document.getElementById('cancelar');
+
+    function openModal(m){
+      m.classList.add('open');
+      const f = m.querySelector('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+      if(f) f.focus();
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(m){
+      m.classList.remove('open');
+      document.body.style.overflow='';
+    }
+    openers.forEach(btn=>btn.addEventListener('click', ()=>openModal(modalContacto)));
+    if(cerrarContacto) cerrarContacto.addEventListener('click', ()=>closeModal(modalContacto));
+    if(cancelar) cancelar.addEventListener('click', ()=>closeModal(modalContacto));
+    if(cerrarOk) cerrarOk.addEventListener('click', ()=>closeModal(modalOk));
+
+    // Cerrar con ESC o clic fuera
+    document.addEventListener('keydown', e=>{
+      if(e.key==='Escape'){ closeModal(modalContacto); closeModal(modalOk); }
+    });
+    [modalContacto, modalOk].forEach(m=>{
+      m.addEventListener('click', e=>{ if(e.target===m){ closeModal(m); } });
+    });
+
+    // ===== Formulario: validación y confirmación =====
+    const form = document.getElementById('formContacto');
+    const errBox = document.getElementById('errors');
+    const errText = document.getElementById('errText');
+    const fields = {
+      nombre: document.getElementById('nombre'),
+      email: document.getElementById('email'),
+      mensaje: document.getElementById('mensaje'),
+      consent: document.getElementById('consent')
+    };
+
+    // Checkbox: toda la línea es clickeable
+    document.getElementById('consentLine').addEventListener('click', (e)=>{
+      if(e.target.id !== 'consent'){
+        fields.consent.checked = !fields.consent.checked;
+      }
+    });
+
+    function markBad(el, bad){
+      el.style.outline = bad ? '2px solid var(--danger)' : '';
+    }
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      errText.textContent = '';
+      errBox.classList.remove('show');
+
+      const okNombre = (fields.nombre.value||'').trim().length >= 2;
+      const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((fields.email.value||'').trim());
+      const okMsg = (fields.mensaje.value||'').trim().length >= 10;
+      const okConsent = fields.consent.checked;
+
+      markBad(fields.nombre, !okNombre);
+      markBad(fields.email, !okEmail);
+      markBad(fields.mensaje, !okMsg);
+
+      const problems = [];
+      if(!okNombre) problems.push('nombre');
+      if(!okEmail) problems.push('correo');
+      if(!okMsg) problems.push('mensaje (mín. 10 caracteres)');
+      if(!okConsent) problems.push('consentimiento');
+
+      if(problems.length){
+        errText.textContent = problems.join(', ') + '.';
+        errBox.classList.add('show');
+        return;
+      }
+
+      // Envío simulado (sin backend; compatible con políticas)
+      // fetch('/api/contacto', { method:'POST', body:new FormData(form), credentials:'omit' })
+
+      form.reset();
+      closeModal(modalContacto);
+      openModal(modalOk);
+    });
+  </script>
+</body>
+</html>
